@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
@@ -28,12 +29,15 @@ import com.aikonia.app.ui.splash.SplashScreen
 import com.aikonia.app.ui.startchat.StartChatScreen
 import com.aikonia.app.ui.upgrade.PurchaseHelper
 import com.aikonia.app.ui.upgrade.UpgradeScreen
-
+import com.aikonia.app.ui.welcome.WelcomeScreen
+import com.aikonia.app.ui.startchat.StartChatViewModel
+import android.content.SharedPreferences
 @OptIn(ExperimentalMaterialNavigationApi::class)
 @ExperimentalAnimationApi
 @Composable
 fun NavGraph(
     navController: NavHostController,
+    sharedPreferences: SharedPreferences, // SharedPreferences wird hier übergeben
     bottomBarState: MutableState<Boolean>,
     darkMode: MutableState<Boolean>,
     purchaseHelper: PurchaseHelper
@@ -79,13 +83,14 @@ fun NavGraph(
         composable(
             route = Screen.Welcome.route
         ) {
+            val startChatViewModel: StartChatViewModel = hiltViewModel()
             WelcomeScreen(
-                userName = "User Name", // Replace with actual user name
+                userName = startChatViewModel.getCurrentUserName(),
                 navigateToHistory = {
                     navController.navigate(Screen.History.route)
                 },
                 playClickSound = {
-                    // Implement the functionality to play a click sound
+                    // Implementieren Sie die Funktionalität, um einen Klicksound abzuspielen
                 }
             )
         }
@@ -139,16 +144,16 @@ fun NavGraph(
                 }
             }
         ) {
-            StartChatScreen(
-                navigateToChat = { name, role, examples ->
-                    val examplesString = examples?.joinToString(separator = "|")
-                    navController.navigate("${Screen.Chat.route}?name=$name&role=$role&examples=$examplesString")
-                },
+            //StartChatScreen(
+            //    navigateToChat = { name, role, examples ->
+            //        val examplesString = examples?.joinToString(separator = "|")
+            //        navController.navigate("${Screen.Chat.route}?name=$name&role=$role&examples=$examplesString")
+             //   },
                 //navigateToUpgrade = {
                 //    navController.navigate(Screen.Upgrade.route)
                // },
 
-            )
+          //  )
         }
 
         composable(route = "${Screen.Chat.route}?name={name}&role={role}&examples={examples}&id={id}",
