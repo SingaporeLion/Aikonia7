@@ -60,7 +60,9 @@ class StartChatViewModel @Inject constructor(
     fun resetUserDataSavedStatus() {
         _isUserDataSaved.value = false
     }
-
+    fun getCurrentUserName(): String {
+        return userRepository.getCurrentUserName()
+    }
     fun checkUserDataExists(userId: Int) = viewModelScope.launch {
         val userExists = userRepository.getUserById(userId) != null
         _isUserDataSaved.value = userExists
