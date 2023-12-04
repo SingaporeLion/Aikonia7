@@ -6,6 +6,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class UserRepositoryImpl(private val userDao: UserDao) : UserRepository {
+
+
     override suspend fun saveUser(user: User) {
         withContext(Dispatchers.IO) {
             userDao.insertUser(user)
@@ -16,5 +18,10 @@ class UserRepositoryImpl(private val userDao: UserDao) : UserRepository {
         return withContext(Dispatchers.IO) {
             userDao.getUserById(userId)
         }
+    }
+
+    override suspend fun getCurrentUserName(): String {
+        // Hier die Logik zur Ermittlung des aktuellen Benutzernamens implementieren
+        return userDao.getCurrentUser().name
     }
 }
