@@ -16,7 +16,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-
+import androidx.compose.ui.unit.dp
 import com.aikonia.app.R // Ersetzen Sie dies durch Ihren tatsächlichen Ressourcen-Importpfad
 
 
@@ -26,7 +26,7 @@ fun WelcomeScreen(
     navigateToHistory: () -> Unit,
     playClickSound: () -> Unit
 ) {
-    val backgroundImage = painterResource(id = R.drawable.background_image) // Ersetzen Sie mit Ihrem Hintergrundbild
+    val backgroundImage = painterResource(id = R.drawable.aikonia_screen) // Ersetzen Sie mit Ihrem Hintergrundbild
     val context = LocalContext.current
 
     Box(modifier = Modifier.fillMaxSize()) {
