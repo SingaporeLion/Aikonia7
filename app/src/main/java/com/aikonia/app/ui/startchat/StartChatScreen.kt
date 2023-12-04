@@ -50,10 +50,10 @@ import android.content.SharedPreferences
 
 @Composable
 fun StartChatScreen(
-navigateToMenu: () -> Unit,
-navigateToChat: (String, String, List<String>?) -> Unit,
-startChatViewModel: StartChatViewModel = hiltViewModel(),
-sharedPreferences: SharedPreferences
+    navigateToMenu: () -> Unit,
+    navigateToChat: (String, String, List<String>?) -> Unit,
+    startChatViewModel: StartChatViewModel = hiltViewModel(),
+    sharedPreferences: SharedPreferences // Bereitstellen der SharedPreferences-Instanz hier
 ) {
     val context = LocalContext.current
     var showDialog by remember { mutableStateOf(false) }
@@ -283,3 +283,5 @@ sharedPreferences: SharedPreferences
         }
     }
 }
+
+
